@@ -20,7 +20,7 @@
 #include "Mesh.h"
 
 // Global Variables
-const char* APP_TITLE = "Computer Graphics - PROJECT";
+const char* APP_TITLE = "Solar System";
  int gWindowWidth = 1800;
  int gWindowHeight = 1200;
 GLFWwindow* gWindow = NULL;
