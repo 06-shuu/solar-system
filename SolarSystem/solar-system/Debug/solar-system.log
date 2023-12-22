@@ -1,4 +1,4 @@
 ﻿  solarsystem.cpp
-D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(580,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(579,55): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(594,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(593,55): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   solar-system.vcxproj -> D:\GithubFolder\solar-system\SolarSystem\solar-system\bin\solar-system.exe

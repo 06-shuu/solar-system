@@ -7,7 +7,11 @@ VAO::VAO() {
 }
 
 // deconstruct
-VAO::~VAO() {
+//VAO::~VAO() {
+//	glDeleteVertexArrays(1, &ID);
+//}
+void VAO::Delete()
+{
 	glDeleteVertexArrays(1, &ID);
 }
 
@@ -19,8 +23,9 @@ void VAO::unbind() {
 	glBindVertexArray(0);
 }
 
-void VAO::Attribpointer(VAO& VAO, GLuint location, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset) {
-	VAO.bind();
+void VAO::Attribpointer(GLuint location, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset) {
+	bind();
 	glVertexAttribPointer(location, numComponents, type, GL_FALSE, stride * sizeof(GLfloat), offset);
 	glEnableVertexAttribArray(location);
+	unbind();
 }
