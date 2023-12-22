@@ -51,4 +51,37 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\intro.frag" />
+    <None Include="res\shaders\intro.vert" />
+    <None Include="res\shaders\lighting_phong.frag" />
+    <None Include="res\shaders\lighting_phong.vert" />
+    <None Include="res\shaders\skyBox.frag" />
+    <None Include="res\shaders\skyBox.vert" />
+    <None Include="res\shaders\sun.frag" />
+    <None Include="res\shaders\sun.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\texture\skyBox\back.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\texture\skyBox\bottom.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\texture\skyBox\front.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\texture\skyBox\left.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\texture\skyBox\top.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\texture\skyBox\right.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\texture\introScreen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

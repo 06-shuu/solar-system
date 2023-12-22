@@ -33,6 +33,25 @@
     <ClInclude Include="src\texture.h" />
     <ClInclude Include="src\VAO.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="res\shaders\intro.frag" />
+    <None Include="res\shaders\intro.vert" />
+    <None Include="res\shaders\lighting_phong.frag" />
+    <None Include="res\shaders\lighting_phong.vert" />
+    <None Include="res\shaders\skyBox.frag" />
+    <None Include="res\shaders\skyBox.vert" />
+    <None Include="res\shaders\sun.frag" />
+    <None Include="res\shaders\sun.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\texture\introScreen.png" />
+    <Image Include="res\texture\skyBox\back.jpg" />
+    <Image Include="res\texture\skyBox\bottom.jpg" />
+    <Image Include="res\texture\skyBox\front.jpg" />
+    <Image Include="res\texture\skyBox\left.jpg" />
+    <Image Include="res\texture\skyBox\right.jpg" />
+    <Image Include="res\texture\skyBox\top.jpg" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

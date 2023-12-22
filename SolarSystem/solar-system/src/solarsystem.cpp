@@ -126,13 +126,6 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, introVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(introScreenVertices), introScreenVertices, GL_STATIC_DRAW);
 
-	
-	//VAO introVAO;
-	//introVAO.bind();
-	//introVAO.Attribpointer(0, 3, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)0);
-	//introVAO.Attribpointer(1, 2, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	//introVAO.unbind(); 
-
 	glGenVertexArrays(1, &introVAO);
 	glBindVertexArray(introVAO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
@@ -282,9 +275,7 @@ int main()
 			glUniform1i(glGetUniformLocation(introShader.getProgram(), "introSampler"), 0);
 
 			glBindVertexArray(introVAO);
-			//introVAO.bind();
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-			//introVAO.unbind(); 
 			glBindVertexArray(0);
 			introTexture.unbind(0);
 
@@ -444,7 +435,6 @@ int main()
 	glDeleteVertexArrays(1, &skyBoxVBO);
 	glDeleteBuffers(1, &skyBoxIBO);
 	glDeleteVertexArrays(1, &introVAO);
-	//introVAO.Delete();
 	glDeleteVertexArrays(1, &introVBO);
 	glDeleteBuffers(1, &introIBO);
 	glfwTerminate();

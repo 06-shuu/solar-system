@@ -25,7 +25,7 @@ void VAO::unbind() {
 
 void VAO::Attribpointer(GLuint location, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset) {
 	bind();
-	glVertexAttribPointer(location, numComponents, type, GL_FALSE, stride * sizeof(GLfloat), offset);
+	glVertexAttribPointer(location, numComponents, type, GL_FALSE, stride, offset);
 	glEnableVertexAttribArray(location);
 	unbind();
 }
