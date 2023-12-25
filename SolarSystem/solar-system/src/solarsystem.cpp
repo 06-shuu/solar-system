@@ -20,6 +20,7 @@
 #include "Mesh.h"
 #include "VAO.h"
 #include "VBO.h"
+#include "IBO.h"
 
 // Global Variables
 const char* APP_TITLE = "Solar System";
@@ -78,7 +79,7 @@ int main()
 
 
 	//skybox (gl_cube_map) vertices 
-	float skyBoxVertices[] = {
+	GLfloat skyBoxVertices[] = {
 		//   Coordinates
 		-1.0f, -1.0f,  1.0f,
 		 1.0f, -1.0f,  1.0f,
@@ -90,7 +91,7 @@ int main()
 		-1.0f,  1.0f, -1.0f
 	};
 
-	unsigned int skyBoxIndices[] = {
+	GLuint skyBoxIndices[] = {
 		1, 2, 6,
 		6, 5, 1,
 		0, 4, 7,
@@ -105,7 +106,7 @@ int main()
 		6, 2, 3
 	};
 
-	float introScreenVertices[] = {
+	GLfloat introScreenVertices[] = {
 		// position            //texture
 		-1.0f, -1.0f, 0.0f,   0.0f, 0.0f,
 		 1.0f, -1.0f, 0.0f,   1.0f, 0.0f,
@@ -113,13 +114,13 @@ int main()
 		-1.0f,  1.0f, 0.0f,   0.0f, 1.0f,
 	};
 
-	unsigned int introScreenIndices[] = {
+	GLuint introScreenIndices[] = {
 		0, 1, 2,
 		2, 3, 0
 	};
 
 	//For the skyBox
-	unsigned int skyBoxIBO, introIBO; 
+	//unsigned int skyBoxIBO; 
 
 
 	// ===================== For the introScreen
@@ -144,9 +145,12 @@ int main()
 
 
 	// Set up index buffer
-	glGenBuffers(1, &introIBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, introIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(introScreenIndices), introScreenIndices, GL_STATIC_DRAW); 
+	IBO introIBO;
+	introIBO.bind();
+	introIBO.BufferData(sizeof(introScreenIndices), introScreenIndices);
+	//glGenBuffers(1, &introIBO);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, introIBO);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(introScreenIndices), introScreenIndices, GL_STATIC_DRAW); 
 
 	// ===================== For the Skybox
 
@@ -166,10 +170,12 @@ int main()
 	skyBoxVAO.bind();
 	skyBoxVAO.Attribpointer(0, 3, GL_FLOAT, 3 * sizeof(GLfloat), (GLvoid*)0);
 
-	
-	glGenBuffers(1, &skyBoxIBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skyBoxIBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(skyBoxIndices), &skyBoxIndices, GL_STATIC_DRAW);
+	IBO skyBoxIBO;
+	skyBoxIBO.bind();
+	skyBoxIBO.BufferData(sizeof(skyBoxIndices),skyBoxIndices);
+	//glGenBuffers(1, &skyBoxIBO);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skyBoxIBO);
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(skyBoxIndices), &skyBoxIndices, GL_STATIC_DRAW);
 
 	
 	//glBindBuffer(GL_ARRAY_BUFFER, 0); //unbind vbo
@@ -458,10 +464,10 @@ int main()
 	//clean up
 	//glDeleteVertexArrays(1, &skyBoxVAO);
 	//glDeleteVertexArrays(1, &skyBoxVBO);
-	glDeleteBuffers(1, &skyBoxIBO);
+	//glDeleteBuffers(1, &skyBoxIBO);
 	//glDeleteVertexArrays(1, &introVAO);
 	//glDeleteVertexArrays(1, &introVBO);
-	glDeleteBuffers(1, &introIBO);
+	//glDeleteBuffers(1, &introIBO);
 	glfwTerminate();
 
 	return 0;
