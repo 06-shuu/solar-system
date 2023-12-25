@@ -7,13 +7,10 @@ VAO::VAO() {
 }
 
 // deconstruct
-//VAO::~VAO() {
-//	glDeleteVertexArrays(1, &ID);
-//}
-void VAO::Delete()
-{
+VAO::~VAO() {
 	glDeleteVertexArrays(1, &ID);
 }
+
 
 void VAO::bind() {
 	glBindVertexArray(ID);
@@ -27,5 +24,4 @@ void VAO::Attribpointer(GLuint location, GLuint numComponents, GLenum type, GLsi
 	bind();
 	glVertexAttribPointer(location, numComponents, type, GL_FALSE, stride, offset);
 	glEnableVertexAttribArray(location);
-	unbind();
 }

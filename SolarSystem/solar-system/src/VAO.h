@@ -8,14 +8,14 @@
 
 class VAO {
 public:
-	GLuint ID;
 	VAO();
-	//~VAO();
+	~VAO();
 	void bind();
 	void unbind();
 	void Attribpointer(GLuint location, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset);
-	void Delete(); 
-	
+
+private:
+	GLuint ID;
 };
 
 #endif

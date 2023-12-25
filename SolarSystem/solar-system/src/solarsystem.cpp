@@ -126,13 +126,17 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, introVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(introScreenVertices), introScreenVertices, GL_STATIC_DRAW);
 
-	glGenVertexArrays(1, &introVAO);
-	glBindVertexArray(introVAO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-	//for texture 
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	glEnableVertexAttribArray(1);
+	VAO intVAO;
+	intVAO.bind();
+	intVAO.Attribpointer(0, 3, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)0);
+	intVAO.Attribpointer(1, 2, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	//glGenVertexArrays(1, &introVAO);
+	//glBindVertexArray(introVAO);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+	//glEnableVertexAttribArray(0);
+	////for texture 
+	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	//glEnableVertexAttribArray(1);
 
 
 	// Set up index buffer
@@ -274,9 +278,11 @@ int main()
 			introTexture.bind(0);
 			glUniform1i(glGetUniformLocation(introShader.getProgram(), "introSampler"), 0);
 
-			glBindVertexArray(introVAO);
+			//glBindVertexArray(introVAO);
+			intVAO.bind();
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-			glBindVertexArray(0);
+			intVAO.unbind();
+			//glBindVertexArray(0);
 			introTexture.unbind(0);
 
 			// Swap front and back buffers
