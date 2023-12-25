@@ -23,7 +23,7 @@
     <ClCompile Include="src\IBO.cpp" />
     <ClCompile Include="src\Mesh.cpp" />
     <ClCompile Include="src\ShaderProgram.cpp" />
-    <ClCompile Include="src\solarsystem.cpp" />
+    <ClCompile Include="src\SolarSystem.cpp" />
     <ClCompile Include="src\texture.cpp" />
     <ClCompile Include="src\VAO.cpp" />
     <ClCompile Include="src\VBO.cpp" />
