@@ -19,6 +19,7 @@
 #include "Camera.h"
 #include "Mesh.h"
 #include "VAO.h"
+#include "VBO.h"
 
 // Global Variables
 const char* APP_TITLE = "Solar System";
@@ -118,13 +119,16 @@ int main()
 	};
 
 	//For the skyBox
-	unsigned int skyBoxVBO, skyBoxIBO, introVBO, introIBO; 
+	unsigned int skyBoxIBO, introIBO; 
 
 
 	// ===================== For the introScreen
-	glGenBuffers(1, &introVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, introVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(introScreenVertices), introScreenVertices, GL_STATIC_DRAW);
+	VBO introVBO;
+	introVBO.bind();
+	introVBO.BufferData(sizeof(introScreenVertices), introScreenVertices);
+	//glGenBuffers(1, &introVBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, introVBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(introScreenVertices), introScreenVertices, GL_STATIC_DRAW);
 
 	VAO introVAO;
 	introVAO.bind();
@@ -146,9 +150,12 @@ int main()
 
 	// ===================== For the Skybox
 
-	glGenBuffers(1, &skyBoxVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, skyBoxVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(skyBoxVertices), &skyBoxVertices, GL_STATIC_DRAW);
+	VBO skyBoxVBO;
+	skyBoxVBO.bind();
+	skyBoxVBO.BufferData(sizeof(skyBoxVertices), skyBoxVertices);
+	//glGenBuffers(1, &skyBoxVBO);
+	//glBindBuffer(GL_ARRAY_BUFFER, skyBoxVBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(skyBoxVertices), &skyBoxVertices, GL_STATIC_DRAW);
 
 	/*glGenVertexArrays(1, &skyBoxVAO);
 	glBindVertexArray(skyBoxVAO);
@@ -450,10 +457,10 @@ int main()
 
 	//clean up
 	//glDeleteVertexArrays(1, &skyBoxVAO);
-	glDeleteVertexArrays(1, &skyBoxVBO);
+	//glDeleteVertexArrays(1, &skyBoxVBO);
 	glDeleteBuffers(1, &skyBoxIBO);
 	//glDeleteVertexArrays(1, &introVAO);
-	glDeleteVertexArrays(1, &introVBO);
+	//glDeleteVertexArrays(1, &introVBO);
 	glDeleteBuffers(1, &introIBO);
 	glfwTerminate();
 
