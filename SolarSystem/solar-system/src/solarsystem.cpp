@@ -118,7 +118,7 @@ int main()
 	};
 
 	//For the skyBox
-	unsigned int skyBoxVAO, skyBoxVBO, skyBoxIBO, introVBO, introIBO, introVAO; 
+	unsigned int skyBoxVBO, skyBoxIBO, introVBO, introIBO; 
 
 
 	// ===================== For the introScreen
@@ -126,10 +126,10 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, introVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(introScreenVertices), introScreenVertices, GL_STATIC_DRAW);
 
-	VAO intVAO;
-	intVAO.bind();
-	intVAO.Attribpointer(0, 3, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)0);
-	intVAO.Attribpointer(1, 2, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+	VAO introVAO;
+	introVAO.bind();
+	introVAO.Attribpointer(0, 3, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)0);
+	introVAO.Attribpointer(1, 2, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
 	//glGenVertexArrays(1, &introVAO);
 	//glBindVertexArray(introVAO);
 	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
@@ -145,19 +145,29 @@ int main()
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(introScreenIndices), introScreenIndices, GL_STATIC_DRAW); 
 
 	// ===================== For the Skybox
-	glGenVertexArrays(1, &skyBoxVAO);
+
 	glGenBuffers(1, &skyBoxVBO);
-	glGenBuffers(1, &skyBoxIBO);
-	glBindVertexArray(skyBoxVAO);
 	glBindBuffer(GL_ARRAY_BUFFER, skyBoxVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(skyBoxVertices), &skyBoxVertices, GL_STATIC_DRAW);
+
+	/*glGenVertexArrays(1, &skyBoxVAO);
+	glBindVertexArray(skyBoxVAO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+	glEnableVertexAttribArray(0);*/
+
+	VAO skyBoxVAO;
+	skyBoxVAO.bind();
+	skyBoxVAO.Attribpointer(0, 3, GL_FLOAT, 3 * sizeof(GLfloat), (GLvoid*)0);
+
+	
+	glGenBuffers(1, &skyBoxIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skyBoxIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(skyBoxIndices), &skyBoxIndices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	
+	//glBindBuffer(GL_ARRAY_BUFFER, 0); //unbind vbo
+	//glBindVertexArray(0); //unbind vao
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0); //unbind ibo
 
 	// ============= call shaders
 	ShaderProgram shaderProgram, lightShader, skyBoxShader, introShader;
@@ -279,9 +289,9 @@ int main()
 			glUniform1i(glGetUniformLocation(introShader.getProgram(), "introSampler"), 0);
 
 			//glBindVertexArray(introVAO);
-			intVAO.bind();
+			introVAO.bind();
 			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-			intVAO.unbind();
+			introVAO.unbind();
 			//glBindVertexArray(0);
 			introTexture.unbind(0);
 
@@ -309,13 +319,15 @@ int main()
 		skyBoxShader.setUniform("view", glm::mat4(glm::mat3(fpsCamera.getViewMatrix()))); //camera pos inside the skybox
 		skyBoxShader.setUniform("projection", projection);
 
-		glBindVertexArray(skyBoxVAO);
+		//glBindVertexArray(skyBoxVAO);
+		skyBoxVAO.bind();
 		sbtexture.bind(0);
 		// Get the location of the "skybox" uniform in the shader
 		//GLint skyboxLocation = glGetUniformLocation(skyBoxShader.getProgramID(), "skybox");
 		skyBoxShader.setUniform(skyBoxShader.getProgramID(), "skybox");
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
+		skyBoxVAO.unbind();
+		//glBindVertexArray(0);
 		sbtexture.unbind(0);
 
 		glDepthFunc(GL_LESS);
@@ -437,10 +449,10 @@ int main()
 	} //end of rendering loop
 
 	//clean up
-	glDeleteVertexArrays(1, &skyBoxVAO);
+	//glDeleteVertexArrays(1, &skyBoxVAO);
 	glDeleteVertexArrays(1, &skyBoxVBO);
 	glDeleteBuffers(1, &skyBoxIBO);
-	glDeleteVertexArrays(1, &introVAO);
+	//glDeleteVertexArrays(1, &introVAO);
 	glDeleteVertexArrays(1, &introVBO);
 	glDeleteBuffers(1, &introIBO);
 	glfwTerminate();
