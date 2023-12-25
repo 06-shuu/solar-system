@@ -17,7 +17,6 @@ class ShaderProgram
 public:
 	 ShaderProgram();
 	~ShaderProgram();
-	GLuint getProgramID() const; //added
 
 	enum ShaderType
 	{

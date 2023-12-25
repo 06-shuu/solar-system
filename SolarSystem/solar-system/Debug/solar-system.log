@@ -1,4 +1,22 @@
 ﻿  solarsystem.cpp
-D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(615,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(614,55): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(582,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\GithubFolder\solar-system\SolarSystem\solar-system\src\solarsystem.cpp(581,55): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+LINK : warning LNK4217: symbol '___glewBindBuffer' defined in 'glew32s.lib(glew.obj)' is imported by 'IBO.obj' in function '"public: void __thiscall IBO::bind(void)" (?bind@IBO@@QAEXXZ)'
+LINK : warning LNK4217: symbol '___glewBindBuffer' defined in 'glew32s.lib(glew.obj)' is imported by 'VBO.obj' in function '"public: void __thiscall VBO::bind(void)" (?bind@VBO@@QAEXXZ)'
+LINK : warning LNK4217: symbol '___glewBufferData' defined in 'glew32s.lib(glew.obj)' is imported by 'IBO.obj' in function '"public: void __thiscall IBO::BufferData(int,unsigned int *)" (?BufferData@IBO@@QAEXHPAI@Z)'
+LINK : warning LNK4217: symbol '___glewBufferData' defined in 'glew32s.lib(glew.obj)' is imported by 'VBO.obj' in function '"public: void __thiscall VBO::BufferData(int,float *)" (?BufferData@VBO@@QAEXHPAM@Z)'
+LINK : warning LNK4217: symbol '___glewDeleteBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'IBO.obj' in function '"public: __thiscall IBO::~IBO(void)" (??1IBO@@QAE@XZ)'
+LINK : warning LNK4217: symbol '___glewDeleteBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'VBO.obj' in function '"public: __thiscall VBO::~VBO(void)" (??1VBO@@QAE@XZ)'
+LINK : warning LNK4217: symbol '___glewGenBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'IBO.obj' in function '"public: __thiscall IBO::IBO(void)" (??0IBO@@QAE@XZ)'
+LINK : warning LNK4217: symbol '___glewGenBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'VBO.obj' in function '"public: __thiscall VBO::VBO(void)" (??0VBO@@QAE@XZ)'
+LINK : warning LNK4217: symbol '___glewActiveTexture' defined in 'glew32s.lib(glew.obj)' is imported by 'texture.obj' in function '"public: void __thiscall Texture::bind(unsigned int)" (?bind@Texture@@QAEXI@Z)'
+LINK : warning LNK4217: symbol '___glewGenerateMipmap' defined in 'glew32s.lib(glew.obj)' is imported by 'texture.obj' in function '"public: bool __thiscall Texture::loadCubemap(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,bool)" (?loadCubemap@Texture@@QAE_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0_N@Z)'
+LINK : warning LNK4217: symbol '___glewEnableVertexAttribArray' defined in 'glew32s.lib(glew.obj)' is imported by 'VAO.obj' in function '"public: void __thiscall VAO::Attribpointer(unsigned int,unsigned int,unsigned int,int,void *)" (?Attribpointer@VAO@@QAEXIIIHPAX@Z)'
+LINK : warning LNK4217: symbol '___glewVertexAttribPointer' defined in 'glew32s.lib(glew.obj)' is imported by 'VAO.obj' in function '"public: void __thiscall VAO::Attribpointer(unsigned int,unsigned int,unsigned int,int,void *)" (?Attribpointer@VAO@@QAEXIIIHPAX@Z)'
+LINK : warning LNK4217: symbol '___glewBindVertexArray' defined in 'glew32s.lib(glew.obj)' is imported by 'VAO.obj' in function '"public: void __thiscall VAO::bind(void)" (?bind@VAO@@QAEXXZ)'
+LINK : warning LNK4217: symbol '___glewDeleteVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'VAO.obj' in function '"public: __thiscall VAO::~VAO(void)" (??1VAO@@QAE@XZ)'
+LINK : warning LNK4217: symbol '___glewGenVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'VAO.obj' in function '"public: __thiscall VAO::VAO(void)" (??0VAO@@QAE@XZ)'
+glew32s.lib(glew.obj) : warning LNK4099: PDB 'vc120.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'D:\GithubFolder\solar-system\SolarSystem\solar-system\bin\vc120.pdb'; linking object as if no debug info
   solar-system.vcxproj -> D:\GithubFolder\solar-system\SolarSystem\solar-system\bin\solar-system.exe

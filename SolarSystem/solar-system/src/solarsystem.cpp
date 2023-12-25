@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// solarsystem.cpp 
+// SolarSystem.cpp 
 //  Solar system with sun, moon, and planets.
 //-----------------------------------------------------------------------------
 #include <iostream>
@@ -119,52 +119,26 @@ int main()
 		2, 3, 0
 	};
 
-	//For the skyBox
-	//unsigned int skyBoxIBO; 
-
-
 	// ===================== For the introScreen
 	VBO introVBO;
 	introVBO.bind();
 	introVBO.BufferData(sizeof(introScreenVertices), introScreenVertices);
-	//glGenBuffers(1, &introVBO);
-	//glBindBuffer(GL_ARRAY_BUFFER, introVBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(introScreenVertices), introScreenVertices, GL_STATIC_DRAW);
 
 	VAO introVAO;
 	introVAO.bind();
 	introVAO.Attribpointer(0, 3, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)0);
 	introVAO.Attribpointer(1, 2, GL_FLOAT, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	//glGenVertexArrays(1, &introVAO);
-	//glBindVertexArray(introVAO);
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
-	//glEnableVertexAttribArray(0);
-	////for texture 
-	//glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-	//glEnableVertexAttribArray(1);
-
 
 	// Set up index buffer
 	IBO introIBO;
 	introIBO.bind();
 	introIBO.BufferData(sizeof(introScreenIndices), introScreenIndices);
-	//glGenBuffers(1, &introIBO);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, introIBO);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(introScreenIndices), introScreenIndices, GL_STATIC_DRAW); 
 
 	// ===================== For the Skybox
 
 	VBO skyBoxVBO;
 	skyBoxVBO.bind();
 	skyBoxVBO.BufferData(sizeof(skyBoxVertices), skyBoxVertices);
-	//glGenBuffers(1, &skyBoxVBO);
-	//glBindBuffer(GL_ARRAY_BUFFER, skyBoxVBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(skyBoxVertices), &skyBoxVertices, GL_STATIC_DRAW);
-
-	/*glGenVertexArrays(1, &skyBoxVAO);
-	glBindVertexArray(skyBoxVAO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
-	glEnableVertexAttribArray(0);*/
 
 	VAO skyBoxVAO;
 	skyBoxVAO.bind();
@@ -173,10 +147,6 @@ int main()
 	IBO skyBoxIBO;
 	skyBoxIBO.bind();
 	skyBoxIBO.BufferData(sizeof(skyBoxIndices),skyBoxIndices);
-	//glGenBuffers(1, &skyBoxIBO);
-	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, skyBoxIBO);
-	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(skyBoxIndices), &skyBoxIndices, GL_STATIC_DRAW);
-
 	
 	//glBindBuffer(GL_ARRAY_BUFFER, 0); //unbind vbo
 	//glBindVertexArray(0); //unbind vao
@@ -335,9 +305,8 @@ int main()
 		//glBindVertexArray(skyBoxVAO);
 		skyBoxVAO.bind();
 		sbtexture.bind(0);
-		// Get the location of the "skybox" uniform in the shader
-		//GLint skyboxLocation = glGetUniformLocation(skyBoxShader.getProgramID(), "skybox");
-		skyBoxShader.setUniform(skyBoxShader.getProgramID(), "skybox");
+
+		skyBoxShader.setUniform(skyBoxShader.getProgram(), "skybox");
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 		skyBoxVAO.unbind();
 		//glBindVertexArray(0);
@@ -349,24 +318,12 @@ int main()
 
 		//===========CALL ZOOM IN PLANET FUNCTION========
 
-		//zoomInPlanet(planetPos);
-		//we can choose any zooming factor 
-		//zoomInPlanet(planetPos, 0, 5.0f); // Zoom in on Mercury with a factor of 5.0
-		//zoomInPlanet(planetPos, 1, 10.0f); // Venus
-		//zoomInPlanet(planetPos, 2, 10.0f); // Moon
-		//zoomInPlanet(planetPos, 3, 10.0f); // Earth
-		//zoomInPlanet(planetPos, 4, 10.0f); // Mars
-		//zoomInPlanet(planetPos, 5, 10.0f); // Jupiter
-		//zoomInPlanet(planetPos, 6, 10.0f); // Saturn
-		//zoomInPlanet(planetPos, 7, 10.0f); // Uranus
-		//zoomInPlanet(planetPos, 8, 10.0f); // Neptun
-
 		for (int i = 0; i < numModels; i++)
 		{
-				if(i==0)
-					zoomInPlanet(planetPos, i, 5.0f);
-				zoomInPlanet(planetPos, i, 10.0f);
-				//projection = glm::ortho(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 5.0f);
+			if(i==0)
+				zoomInPlanet(planetPos, i, 5.0f);
+			zoomInPlanet(planetPos, i, 10.0f);
+			//projection = glm::ortho(0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 5.0f);
 		}
 		
 		//=================================================
@@ -381,7 +338,7 @@ int main()
 
 		// Bind the light texture to texture unit 0
 		sunTexture.bind(0);
-		glUniform1i(glGetUniformLocation(lightShader.getProgramID(), "lightTexture"), 0);
+		glUniform1i(glGetUniformLocation(lightShader.getProgram(), "lightTexture"), 0);
 
 		lightShader.setUniform("model", model);
 		lightShader.setUniform("lightColor", sunlightColor);
@@ -461,13 +418,6 @@ int main()
 		lastTime = cuurentTime;
 	} //end of rendering loop
 
-	//clean up
-	//glDeleteVertexArrays(1, &skyBoxVAO);
-	//glDeleteVertexArrays(1, &skyBoxVBO);
-	//glDeleteBuffers(1, &skyBoxIBO);
-	//glDeleteVertexArrays(1, &introVAO);
-	//glDeleteVertexArrays(1, &introVBO);
-	//glDeleteBuffers(1, &introIBO);
 	glfwTerminate();
 
 	return 0;
@@ -534,19 +484,6 @@ bool initOpenGL()
 
 void glfw_onKey(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-	//if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	//	glfwSetWindowShouldClose(window, GL_TRUE);
-
-	//if (key == GLFW_KEY_F && action == GLFW_PRESS)
-	//{
-	//	gWireframe = !gWireframe;
-	//	if (gWireframe)
-	//		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	//	else
-	//		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-	//}
-
-	//added
 	if (action == GLFW_PRESS)
 	{
 		switch (key)
@@ -679,33 +616,3 @@ void zoomInPlanet(glm::vec3 planetPos[], int planetIndex, float zoomFactor) {
 		fpsCamera.setPosition(planetPos[planetIndex] + glm::vec3(0.0f, 0.0f, zoomFactor));
 	}
 }
-//added
-//void zoomInPlanet(glm::vec3 planetPos[]) {
-//	if (glfwGetKey(gWindow, GLFW_KEY_1 + 0) == GLFW_PRESS) { //Mercury 
-//		fpsCamera.setPosition(planetPos[0] + glm::vec3(0.0f, 0.0f, 5.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_2 + 1) == GLFW_PRESS) { //Venus
-//		fpsCamera.setPosition(planetPos[1] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_3 + 2) == GLFW_PRESS) { //Earth
-//		fpsCamera.setPosition(planetPos[2] + glm::vec3(0.0f, 0.0f, 10.0f)); 
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_4 + 3) == GLFW_PRESS) {//Moon
-//		fpsCamera.setPosition(planetPos[3] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_5 + 4) == GLFW_PRESS) {//Mars
-//		fpsCamera.setPosition(planetPos[4] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_6 + 5) == GLFW_PRESS) {//Jupiter
-//		fpsCamera.setPosition(planetPos[5] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_7 + 6) == GLFW_PRESS) {//Saturn
-//		fpsCamera.setPosition(planetPos[6] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_8 + 7) == GLFW_PRESS) {//Uranus
-//		fpsCamera.setPosition(planetPos[7] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//	else if (glfwGetKey(gWindow, GLFW_KEY_9 + 8) == GLFW_PRESS) {//Neptun
-//		fpsCamera.setPosition(planetPos[8] + glm::vec3(0.0f, 0.0f, 10.0f));
-//	}
-//}
